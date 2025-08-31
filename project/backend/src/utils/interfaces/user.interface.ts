@@ -1,6 +1,7 @@
 export interface User {
     full_name : string,
-    api_token : string,
+    username : string,
+    api_token ?: string,
     password : string,
     is_team_driver_login : boolean,
     oidc_access_token : string,
