@@ -6,7 +6,7 @@ import { CreateTokenDto } from "src/utils/dtos/createToken.dto";
 import { randomBytes } from "crypto";
 
 @Injectable()
-export class TokenService {
+export class ApiTokenService {
     constructor(
         @InjectModel('ApiToken')
         private readonly tokenModel : Model<ApiToken>

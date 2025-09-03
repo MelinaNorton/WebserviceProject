@@ -2,13 +2,13 @@ import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/co
 import { LoginUserDto } from "src/utils/dtos/loginUser.dto";
 import { UserService } from "src/users/user.service";
 import { HttpCode } from "@nestjs/common";
-import { TokenService } from "src/api_tokens/api_tokens.service";
+import { ApiTokenService } from "src/api_tokens/api_tokens.service";
 import { LoginResponseInterface } from "src/utils/interfaces/loginResponse.interface";
 @Injectable()
 export class AuthService {
     constructor(
         private readonly userService : UserService,
-        private readonly tokenService : TokenService
+        private readonly tokenService : ApiTokenService
     ){}
 
     //login logic w/username & passowrd -> return api token & User object
