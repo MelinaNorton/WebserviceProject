@@ -8,9 +8,5 @@ export class AuthController{
     ){}
 
 //post endpoint that takes the username & password (outlined in loginUserDto) from the Body and the headers from the Req object
-@Post()
-async createToken(){
-    
-}
 
 }

@@ -14,9 +14,9 @@ export class UserService {
     //simple finding logic for username, full_name, _id (Mongo generated) or password
     async find(filterUserDto: FilterUserDto){
         const user = await this.userModel.findOne(filterUserDto)
-        if(user != null){
-            return user
+        if(user == null){
+            throw new NotFoundException("No User found by those filters")
         }
-        return new NotFoundException("No User found by those filters")
+        return user
     }
 }

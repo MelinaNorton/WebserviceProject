@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { TokenSchema } from 'src/utils/schemas/token.schema';
+import { ApiTokenSchema } from 'src/utils/schemas/api_token.schema';
 import { UsersModule } from 'src/users/user.module';
 import { UserService } from 'src/users/user.service';
 
@@ -9,7 +9,7 @@ import { UserService } from 'src/users/user.service';
     imports:[UsersModule],
     controllers: [],
     providers: [UserService],
-    exports: [MongooseModule.forFeature([{name: 'Token', schema: TokenSchema}])]
+    exports: [MongooseModule.forFeature([{name: 'ApiToken', schema: ApiTokenSchema}])]
 })
 
 export class TokensModule{}
