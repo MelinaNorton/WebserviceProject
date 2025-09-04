@@ -17,8 +17,9 @@ export class JwtTokenService {
     private readonly jwtrefreshexpires;
 
     constructor(
-        @InjectModel('JwtToken')
+        @InjectModel('JwtAccess')
         private readonly jwtModel : Model<JWT>,
+        @InjectModel('JwtRefresh')
         private readonly jwtRefreshModel : Model<JWTRefresh>,
         private readonly jwtService : JwtService,
         private readonly config : ConfigService
@@ -34,18 +35,18 @@ export class JwtTokenService {
         const jti = randomUUID()
         const jwtval = await this.jwtService.sign({sub:user._id, username:user.username, type:'access', jti:jti}, {
              secret: this.jwtsecret,
-             expiresIn:this.jwtexpires
+             expiresIn:this.jwtexpires,
         })
-        return this.jwtModel.create(jwtval)
+        return await this.jwtModel.create({jwt : jwtval, user_id: user._id})
     }
 
-    async createRefreshJwtToken(user : User):Promise<JWT>{
+    async createRefreshJwtToken(user : User):Promise<JWTRefresh>{
         const jti = randomUUID()
         const jwtval = await this.jwtService.sign({sub:user._id, username:user.username, type:'refresh', jti:jti}, {
              secret: this.jwtsecret,
              expiresIn:this.jwtrefreshexpires
         })
-        return this.jwtModel.create(jwtval)
+        return await this.jwtRefreshModel.create({jwtrefresh:jwtval, user_id:user._id})
     }
 
     async attachJwtToken(token:string, res:Response){
