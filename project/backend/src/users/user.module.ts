@@ -5,7 +5,7 @@ import { UserService } from './user.service';
 
 //create & export our Users model (which can search our DB table)
 @Module({
-    imports:[],
+    imports:[MongooseModule, MongooseModule.forFeature([{name: 'User', schema: UserSchema}])],
     controllers: [],
     providers: [UserService],
     exports: [MongooseModule.forFeature([{name: 'User', schema: UserSchema}])]

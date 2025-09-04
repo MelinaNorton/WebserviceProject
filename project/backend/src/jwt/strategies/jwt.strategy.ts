@@ -3,6 +3,7 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { JwtTokenService } from "../jwt.service";
 
 const jwtAccessTokenExtractor = (req : Request) =>{
     const accessToken = ExtractJwt.fromHeader("access")
@@ -19,10 +20,3 @@ const jwtRefreshTokenExtractor = (req : Request) =>{
     }
     return refreshToken
 }
-
-/*@Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, 'jwt'){
-    constructor(config:ConfigService, private readonly tokenService: ){
-
-    }
-}*/

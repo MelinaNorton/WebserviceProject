@@ -6,7 +6,7 @@ import { UserService } from 'src/users/user.service';
 import { ApiTokenService } from './api_tokens.service';
 //create & export our Users model (which can search our DB table)
 @Module({
-    imports:[UsersModule],
+    imports:[UsersModule, MongooseModule, MongooseModule.forFeature([{name: 'ApiToken', schema: ApiTokenSchema}])],
     controllers: [],
     providers: [UserService, ApiTokenService],
     exports: [MongooseModule.forFeature([{name: 'ApiToken', schema: ApiTokenSchema}])]
