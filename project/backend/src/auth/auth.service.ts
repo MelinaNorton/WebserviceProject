@@ -7,36 +7,46 @@ import bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
+    //creates instances of all the services used in the auth logic below
     constructor(
         private readonly userService : UserService,
         private readonly apitokenService : ApiTokenService,
         private readonly tokenService : JwtTokenService
     ){}
 
+    //accepts two arguments, the hashed password value grabbed from the DB (password) and the password value read from the 
+    //JSON body (DTO) (userpass)
     async checkPass({password, userpass}:{password:string, userpass:string}):Promise<Boolean>{
         return await bcrypt.compare(userpass, password)
     }
 
     //login logic w/username & passowrd -> return api token & User object
     async loginUser(loginUserDto : LoginUserDto):Promise<any>{
+        //find the username in the DB & return if not found
         const user = await this.userService.find({username: loginUserDto.username})
         if(!user){
             throw new UnauthorizedException("No User Found by these credentials")
         }
+
+        //checks if the found user's password in the DB matches the passed-in value & returns if not
         const match = await this.checkPass({password:user.password, userpass:loginUserDto.password})
         if(!match){
             throw new UnauthorizedException("User credentials do not match; try again")
         }
+
+        //create all necessary tokens via their respective services using the user's data from the returned User object
         const apitoken = await this.apitokenService.createToken(user)
         const accesstokendata = await this.tokenService.createJwtToken(user)
         const refreshtokendata  = await this.tokenService.createRefreshJwtToken(user)
 
+        //populate return data
         const apikey = apitoken.api_key
         const accesstoken = accesstokendata.jwt
         const refreshtoken = refreshtokendata.jwtrefresh
         const fullname = user.full_name
         const menu_code = user.menu_code
         const dashboard_code = user.dashboard_code
+        
         return {fullname, apikey, accesstoken, refreshtoken, menu_code, dashboard_code}
     }
 

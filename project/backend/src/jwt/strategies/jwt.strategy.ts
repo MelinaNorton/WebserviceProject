@@ -5,6 +5,8 @@ import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtTokenService } from "../jwt.service";
 
+//functions to grab the jwt tokens from the request header if such a functionality is eventually needed (for example, to)
+//check the expiry, jti, sender, etc
 const jwtAccessTokenExtractor = (req : Request) =>{
     const accessToken = ExtractJwt.fromHeader("access")
     if(!accessToken){

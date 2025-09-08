@@ -8,11 +8,13 @@ import bcrypt from 'bcrypt'
 
 @Injectable()
 export class UserService {
+    //creates an instance of the model used in the service below
     constructor(
         @InjectModel('User')
         private readonly userModel : Model<User>
     ){}
 
+    //uses the User model to create a new instance of a User in the DB (with password hashing)
     async create(createUserDto : CreateUserDto){
         const salt = await bcrypt.genSalt(10)
         const securepass = await bcrypt.hash(createUserDto.password, salt)

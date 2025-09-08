@@ -5,11 +5,16 @@ import { LoadsController } from './loads.controller';
 import { LoadsService } from './loads.service';
 import { AuthModule } from 'src/auth/auth.module';
 import { TokensModule } from 'src/api_tokens/api_tokens.module';
+
 //create & export our Loads model
 @Module({
+    //creates our DB model for the loads table & registers the modules used in this module
     imports:[MongooseModule.forFeature([{name: 'Loads', schema: LoadSchema}]), AuthModule, TokensModule],
+    //registers this module's controller
     controllers: [LoadsController],
+    //registers the services used in this module
     providers: [LoadsService],
+    //exports the loads model for use outside this module
     exports: [MongooseModule.forFeature([{name: 'Loads', schema: LoadSchema}])]
 })
 
