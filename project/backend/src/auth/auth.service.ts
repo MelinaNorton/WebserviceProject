@@ -1,11 +1,8 @@
 import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { LoginUserDto } from "src/utils/dtos/loginUser.dto";
 import { UserService } from "src/users/user.service";
-import { HttpCode } from "@nestjs/common";
 import { ApiTokenService } from "src/api_tokens/api_tokens.service";
-import { LoginResponseInterface } from "src/utils/interfaces/loginResponse.interface";
 import { JwtTokenService } from "src/jwt/jwt.service";
-import { JWTRefresh } from "src/utils/interfaces/jwtrefresh.interface";
 import bcrypt from 'bcrypt'
 
 @Injectable()

@@ -1,7 +1,7 @@
 import { Load } from "src/utils/interfaces/load.interface";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { randomBytes } from "crypto";
 import { CreateLoadDto } from "src/utils/dtos/createLoad.sto";
 import { AuthService } from "src/auth/auth.service";
