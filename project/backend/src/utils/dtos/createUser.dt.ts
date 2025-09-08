@@ -9,4 +9,10 @@ export class CreateUserDto {
 
     @IsString()
     full_name : string
+
+    @IsString()
+    menu_code : string
+    
+    @IsString()
+    dashboard_code : string
 }

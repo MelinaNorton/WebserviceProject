@@ -37,7 +37,10 @@ export class AuthService {
         const apikey = apitoken.api_key
         const accesstoken = accesstokendata.jwt
         const refreshtoken = refreshtokendata.jwtrefresh
-        return {user, apikey, accesstoken, refreshtoken}
+        const fullname = user.full_name
+        const menu_code = user.menu_code
+        const dashboard_code = user.dashboard_code
+        return {fullname, apikey, accesstoken, refreshtoken, menu_code, dashboard_code}
     }
 
     //auth logic w/username & passowrd -> return User object
@@ -46,6 +49,6 @@ export class AuthService {
         console.log("Api Key located")
         const user = await this.userService.find({_id : found})
         console.log("Api Key's Associated User located")
-        return {full_name: user.full_name, api_key:api_key}
+        return {full_name: user.full_name, api_key:api_key, user_id: user._id}
     }
 }

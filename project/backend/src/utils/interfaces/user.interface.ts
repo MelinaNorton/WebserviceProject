@@ -3,9 +3,7 @@ export interface User {
     username : string,
     api_token ?: string,
     password : string,
-    is_team_driver_login : boolean,
-    oidc_access_token : string,
-    oidc_expires_in : string,
-    oidc_refresh_token : string,
+    menu_code ?: string,
+    dashboard_code ?: string,
     _id : string
 }

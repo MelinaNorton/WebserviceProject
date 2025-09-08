@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { TokensModule } from './api_tokens/api_tokens.module';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { LoadsModule } from './loads/loads.module';
 
 //set up nests built-in config module with basic settings, global & path
 @Module({
@@ -21,6 +22,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   JwtModule,
   AuthModule,
   TokensModule,
+  LoadsModule
 ],
   controllers: [AppController],
   providers: [AppService],

@@ -12,7 +12,7 @@ import { AuthController } from './auth.controller';
     imports:[UsersModule, TokensModule, JwtTokenModule],
     controllers: [AuthController],
     providers: [UserService, ApiTokenService, AuthService],
-    exports: []
+    exports: [AuthService]
 })
 
 export class AuthModule{}
