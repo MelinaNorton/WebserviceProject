@@ -16,12 +16,12 @@ Here, the user's returned apikey is sent via the request's url, to
 ```
 GET http://localhost:3000/authenticate/${apikey_value}
 ```
-<img width="960" height="564" alt="endpoint3_getloadlist_webservicedemo" src="https://github.com/user-attachments/assets/cda69a76-56d2-4db8-8de3-c02b054b1fdf" />
+<img width="960" height="564" alt="endpoint2_authapikey_webservicedemo" src="https://github.com/user-attachments/assets/6c22b30e-adbc-4b53-9047-d4879a82760c" />
 
 ### Get User's Loads
 Here, the user's load list is returned from the user's associated apikey, with the request sent to
 ```
 GET http://localhost:3000/authenticate/${apikey_value}
 ```
-<img width="960" height="564" alt="endpoint2_authapikey_webservicedemo" src="https://github.com/user-attachments/assets/6c22b30e-adbc-4b53-9047-d4879a82760c" />
+<img width="960" height="564" alt="endpoint3_getloadlist_webservicedemo" src="https://github.com/user-attachments/assets/cda69a76-56d2-4db8-8de3-c02b054b1fdf" />
 
