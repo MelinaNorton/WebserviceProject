@@ -1,6 +1,6 @@
 ## Webservice Project
 
-#This endpoint creates a test user to demo the endpoints
+This endpoint creates a test user to demo the endpoints
 <img width="960" height="564" alt="post_user_webservicedemo" src="https://github.com/user-attachments/assets/71f249f7-87db-4f50-a41b-a0052cd38c87" />
 
 ## Endpoints Demo
