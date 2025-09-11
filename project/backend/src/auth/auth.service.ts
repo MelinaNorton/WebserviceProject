@@ -52,7 +52,6 @@ export class AuthService {
 
     //auth logic w/username & passowrd -> return User object
     async authUser(api_key : string){
-        console.log("apikey passed to authuser: ", api_key)
         const found = await this.apitokenService.findToken(api_key)
         console.log("Api Key located")
         const user = await this.userService.find({_id : found})
