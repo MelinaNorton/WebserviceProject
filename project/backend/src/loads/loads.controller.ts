@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Param } from "@nestjs/common";
+import { Controller, Post, Get, Body, Param, Request } from "@nestjs/common";
 import { LoadsService } from "./loads.service";
 import { CreateLoadDto } from "src/utils/dtos/createLoad.sto";
 
@@ -17,7 +17,8 @@ async createLoad(@Body() createLoadDto : CreateLoadDto){
 
 //get endpoint that returns the user's loads based on the API key parameter
 @Get(':apikey')
-async getLoads(@Param('apikey') api_key : string){
+async getLoads(@Param('apikey') api_key : string, @Request() req:Request){
+    console.log("Loads request: ", req)
     return this.loadsService.getLoads(api_key)
 }
 
