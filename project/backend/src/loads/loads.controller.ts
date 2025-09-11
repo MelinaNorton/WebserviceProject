@@ -18,7 +18,7 @@ async createLoad(@Body() createLoadDto : CreateLoadDto){
 
 //get endpoint that returns the user's loads based on the API key parameter
 @Get()
-async getLoads(@Headers('Authorization') authHeader : string){
+async getLoads(@Headers('authorization') authHeader : string){
     const api_key = authHeader
     console.log("Auth header: ", api_key)
     return this.loadsService.getLoads(api_key)
