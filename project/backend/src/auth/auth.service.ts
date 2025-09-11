@@ -40,14 +40,14 @@ export class AuthService {
         const refreshtokendata  = await this.tokenService.createRefreshJwtToken(user)
 
         //populate return data
-        const apikey = apitoken.api_key
+        const api_token = apitoken.api_key
         const accesstoken = accesstokendata.jwt
         const refreshtoken = refreshtokendata.jwtrefresh
-        const fullname = user.full_name
+        const full_name = user.full_name
         const menu_code = user.menu_code
         const dashboard_code = user.dashboard_code
         
-        return {fullname, apikey, accesstoken, refreshtoken, menu_code, dashboard_code}
+        return {full_name, api_token, menu_code, dashboard_code}
     }
 
     //auth logic w/username & passowrd -> return User object
