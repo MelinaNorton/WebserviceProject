@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Req, Request, Param } from "@nestjs/common";
+import { Controller, Post, Get, Body, Req, Request, Param, UnauthorizedException } from "@nestjs/common";
 import { LoginUserDto } from "src/utils/dtos/loginUser.dto";
 import { AuthService } from "./auth.service";
 
@@ -10,7 +10,17 @@ export class AuthController{
 
 //post endpoint that takes the username & password (outlined in loginUserDto) from the Body and the headers from the Req object
 @Post()
-async loginUser(@Req() req:Request, @Body() loginUserDto:LoginUserDto){
+async loginUser(@Req() req:Request){
+    if(req.body == null){
+        throw new UnauthorizedException('No credentials found')
+    }
+    
+    const username = req.body['username']
+    const pass = req.body['password']
+    const loginUserDto = new LoginUserDto()
+    loginUserDto.username = username
+    loginUserDto.password = pass
+    
     return this.authService.loginUser(loginUserDto)
 }
 
