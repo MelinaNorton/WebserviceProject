@@ -19,11 +19,11 @@ async createLoad(@Body() createLoadDto : CreateLoadDto){
 //get endpoint that returns the user's loads based on the API key parameter
 @Get()
 async getLoads(@Headers('authorization') authHeader : string){
-    const api_key = authHeader.match(/^Token\s+token="?([^",\s]+)"?/i)
+    const api_key = authHeader.match(/^\s*Token\b.*\btoken="?([^",\s]+)"?/i);
     if(!api_key){
         throw new UnauthorizedException('no token found in header object')
     }
-    console.log("Auth header: ", api_key)
+    console.log("Auth header: ", api_key[0])
     return this.loadsService.getLoads(api_key[0])
 }
 
