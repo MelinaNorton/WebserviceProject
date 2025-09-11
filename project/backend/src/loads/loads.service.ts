@@ -27,7 +27,8 @@ export class LoadsService {
         if(!authenticated){
             throw new UnauthorizedException('API Token cannot be verified')
         }
-        const user_id = (await this.userService.find({full_name : authenticated.full_name})).get('_id')
+        const user = (await this.userService.find({full_name : authenticated.full_name}))
+        const user_id = user._id
         const loadslist = await this.loadModel.find({user_id : user_id})
         if(!loadslist){
             throw new UnauthorizedException("")
