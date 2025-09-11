@@ -27,6 +27,10 @@ async loginUser(@Req() req:Request){
 
 @Get(':apikey')
 async auth(@Param('apikey') apikey: string){
-    return this.authService.authUser(apikey)
+    const api_key_parsed = apikey.match(/^Token\s+token="?([^",\s]+)"?/i)
+    if(!api_key_parsed){
+        throw new UnauthorizedException("No token parsed from value")
+    }
+    return this.authService.authUser(api_key_parsed[0])
 }
 }
