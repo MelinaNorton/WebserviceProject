@@ -1,6 +1,7 @@
 import { Controller, Post, Get, Body, Param, Request } from "@nestjs/common";
 import { LoadsService } from "./loads.service";
 import { CreateLoadDto } from "src/utils/dtos/createLoad.sto";
+import { Headers } from "@nestjs/common";
 
 @Controller('loads')
 export class LoadsController{
@@ -16,9 +17,10 @@ async createLoad(@Body() createLoadDto : CreateLoadDto){
 }
 
 //get endpoint that returns the user's loads based on the API key parameter
-@Get(':apikey')
-async getLoads(@Param('apikey') api_key : string, @Request() req:Request){
-    console.log("Loads request: ", req)
+@Get()
+async getLoads(@Headers('Authorization') authHeader : string){
+    const api_key = authHeader
+    console.log("Auth header: ", api_key)
     return this.loadsService.getLoads(api_key)
 }
 
