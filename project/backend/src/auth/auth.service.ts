@@ -52,12 +52,8 @@ export class AuthService {
 
     //auth logic w/username & passowrd -> return User object
     async authUser(api_key : string){
-        console.log("Api token passed to authUser: ", api_key)
-        const api_key_parsed = api_key.match(/^Token\s+token="?([^",\s]+)"?/i)
-        if(!api_key_parsed){
-            throw new UnauthorizedException("no key parsed from value")
-        }
-        const found = await this.apitokenService.findToken(api_key_parsed[0])
+        console.log("apikey passed to authuser: ", api_key)
+        const found = await this.apitokenService.findToken(api_key)
         console.log("Api Key located")
         const user = await this.userService.find({_id : found})
         console.log("Api Key's Associated User located")
