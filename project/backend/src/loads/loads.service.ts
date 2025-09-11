@@ -29,10 +29,9 @@ export class LoadsService {
         }
         const user = (await this.userService.find({full_name : authenticated.full_name}))
         const user_id = user._id
+        console.log("User Id: ", user_id)
         const loadslist = await this.loadModel.find({user_id : user_id})
-        if(!loadslist){
-            throw new UnauthorizedException("")
-        }
+    
         return loadslist
     }
 }
