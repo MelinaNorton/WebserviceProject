@@ -5,6 +5,7 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { CreateLoadDto } from "src/utils/dtos/createLoad.sto";
 import { AuthService } from "src/auth/auth.service";
 import { UserService } from "src/users/user.service";
+import { PrunedLoadInterface } from "src/utils/interfaces/pruned_load.interface";
 
 @Injectable()
 export class LoadsService {
@@ -22,7 +23,7 @@ export class LoadsService {
     }
 
     //authenticates the api key, and uses the return data from the auth endpoint to access the user's id & grab their loads list
-    async getLoads(api_key : string):Promise<Array<Load>>{
+    async getLoads(api_key : string):Promise<Array<PrunedLoadInterface>>{
         const authenticated = await this.authService.authUser(api_key)
         if(!authenticated){
             throw new UnauthorizedException('API Token cannot be verified')
@@ -30,7 +31,19 @@ export class LoadsService {
         const user = (await this.userService.find({full_name : authenticated.full_name}))
         const user_id = user._id
         const loadslist = await this.loadModel.find({user_id : user_id})
-    
-        return loadslist
+        const loadslistpruned = new Array<PrunedLoadInterface>
+
+        for(const load of loadslist){
+            const prunedLoad = new PrunedLoadInterface()
+            prunedLoad.id = load._id.toString()
+            prunedLoad.active = load.active
+            prunedLoad.current = load.current
+            prunedLoad.display_identifier = load.display_identifier
+            prunedLoad.load_status = load.load_status
+            prunedLoad.load_status_label = load.load_status_label
+            prunedLoad.sort - load.sort
+            loadslistpruned.push(prunedLoad)
+        }
+        return loadslistpruned
     }
 }
