@@ -9,4 +9,7 @@ export class FilterUserDto {
 
     @IsString()
     password ?: string;
+
+    @IsString()
+    full_name ?: string
 }

@@ -56,6 +56,6 @@ export class AuthService {
         console.log("Api Key located")
         const user = await this.userService.find({_id : found})
         console.log("Api Key's Associated User located")
-        return {full_name: user.full_name, api_key:api_key, user_id: user._id}
+        return {full_name: user.full_name, api_token:api_key}
     }
 }
