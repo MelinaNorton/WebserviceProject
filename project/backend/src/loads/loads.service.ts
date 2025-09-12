@@ -41,7 +41,8 @@ export class LoadsService {
             prunedLoad.display_identifier = load.display_identifier
             prunedLoad.load_status = load.load_status
             prunedLoad.load_status_label = load.load_status_label
-            prunedLoad.sort - load.sort
+            prunedLoad.sort = load.sort
+            prunedLoad.order_number = load.order_number
             loadslistpruned.push(prunedLoad)
         }
         return loadslistpruned
